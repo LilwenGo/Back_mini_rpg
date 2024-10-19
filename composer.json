@@ -1,0 +1,9 @@
+{
+    "name": "lilian/mini-rpg",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Project\\": "src/"
+        }
+    }
+}
