@@ -23,6 +23,8 @@ CREATE TABLE `player`
    PRIMARY KEY (id)
 )ENGINE = InnoDB;
 
+INSERT INTO `player`(id, username, password) VALUES ('default', 'Default', "Can't sign in");
+
 /*==============================================================*/
 /* TABLE : type                                                 */
 /*==============================================================*/
