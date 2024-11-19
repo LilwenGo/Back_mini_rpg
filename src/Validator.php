@@ -18,10 +18,14 @@ class Validator {
         "date" => "Le champ doit être une date !",
         "alpha" => "Le champ peut contenir que des lettres minuscules et majuscules !",
         "alphaNum" => "Le champ peut contenir que des lettres minuscules, majuscules et des chiffres !",
+        "alphaDash" => "Le champ peut contenir que des lettres minuscules, majuscules, des slash et des tirets !",
         "alphaNumDash" => "Le champ peut contenir que des lettres minuscules, majuscules, des chiffres, des slash et des tirets !",
+        "alphaAccent" => "Le champ peut contenir que des lettres minuscules, majuscules ou avec accent !",
+        "alphaDashAccent" => "Le champ peut contenir que des lettres minuscules, majuscules, avec accent, des slash et des tirets !",
         "alphaSpaceAccent" => "Le champ peut contenir que des lettres minuscules, majuscules, avec accent ou des espaces !",
         "numeric" => "Le champ peut contenir que des chiffres !",
-        "confirm" => "Le champs n'est pas conforme au confirm !"
+        "confirm" => "Le champs n'est pas conforme au confirm !",
+        "entityName" => "Le champ ne peut contenir que des lettres minuscules, majuscules et des tirets !",
     ];
     private array $rules = [
         "required" => "#^.+$#",
@@ -34,10 +38,14 @@ class Validator {
         "date" => "#^(\d{4})(\/|-)(0[0-9]|1[0-2])(\/|-)([0-2][0-9]|3[0-1])$#",
         "alpha" => "#^[A-z]+$#",
         "alphaNum" => "#^[A-z0-9]+$#",
-        "alphaNumDash" => "#^[A-z0-9-\|]+$#",
+        "alphaDash" => "#^[A-z\-\|\\\/]+$#",
+        "alphaNumDash" => "#^[A-z0-9\-\|\\\/]+$#",
+        "alphaAccent" => "#^[A-zÀ-ú]+$#",
+        "alphaDashAccent" => "#^[A-zÀ-ú\-\|\\\/]+$#",
         "alphaSpaceAccent" => "#^[A-z À-ú]+$#",
         "numeric" => "#^[0-9]+$#",
-        "confirm" => ""
+        "confirm" => "",
+        "entityName" => "#^[A-z0-9-]+$#"
     ];
 
     public function __construct(array $data = []) {
