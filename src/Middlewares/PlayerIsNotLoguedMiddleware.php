@@ -6,7 +6,7 @@ class PlayerIsNotLoguedMiddleware implements Middleware {
         if(!isset($_SESSION['player']['id'])) {
             return true;
         } else {
-            echo json_encode(["status" => 403, "message" => "Vous êtes déja connecté !"]);
+            respond(403, ["message" => "Vous êtes déja connécté !"]);
             return false;
         }
     }
