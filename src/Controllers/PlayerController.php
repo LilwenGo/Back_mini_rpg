@@ -22,15 +22,15 @@ class PlayerController extends Controller {
                         'id' => $player->getId(),
                         'username' => $player->getUsername(),
                     ];
-                    echo json_encode(["status" => 200]);
+                    respond(200, []);
                 } else {
-                    echo json_encode(["status" => 422, "message" => "Une erreur est survenue lors de la création du compte !"]);
+                    respond(422, ["message" => "Une erreur est survenue lors de la conéxion !"]);
                 }
             } else {
-                echo json_encode(["status" => 400, "message" => "L'utilisateur spécifié n'a pas été trouvé !"]);
+                respond(400, ["message" => "L'utilisateur spécifié n'a pas été trouvé !"]);
             }
         } else {
-            echo json_encode(["status" => 400, "message" => "Erreur sur les champs !", "errors" => $this->validator->errors()]);
+            respond(400, ["errors" => $this->validator->errors(), "message" => "Erreur sur les champs !"]);
         }
     }
 
@@ -50,21 +50,21 @@ class PlayerController extends Controller {
                         'id' => $res['id'],
                         'username' => $_POST['username'],
                     ];
-                    echo json_encode(["status" => 200, "data" => ['id' => $res['id']]]);
+                    respond(200, ["data" => ['id' => $res['id']]]);
                 } else {
-                    echo json_encode(["status" => 422, "message" => "Une erreur est survenue lors de la création du compte !"]);
+                    respond(422, ["message" => "Une erreur est survenue lors de la création du compte !"]);
                 }
             } else {
-                echo json_encode(["status" => 400, "message" => "Le nom d'utilisateur spécifié est déja utilisé !"]);
+                respond(400, ["message" => "Le nom d'utilisateur est déja pris !"]);
             }
         } else {
-            echo json_encode(["status" => 400, "message" => "Erreur sur les champs !", "errors" => $this->validator->errors()]);
+            respond(400, ["errors" => $this->validator->errors(), "message" => "Erreur sur les champs !"]);
         }
     }
 
     public function logout(): void {
         session_start();
         session_destroy();
-        echo json_encode(["status" => 200]);
+        respond(200, []);
     }
 }
