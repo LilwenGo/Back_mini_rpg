@@ -5,9 +5,9 @@ class Route {
 
     private string $path;
     private string $prefix;
-    private ?string $middleware = null;
     private string $callable;
     private array $matches = [];
+    private array $middlewares = [];
     private array $params = [];
 
     public function __construct(string $path, string $callable){
@@ -29,15 +29,15 @@ class Route {
     }
 
     public function call() {
-        if($this->middleware !== null) {
+        foreach($this->middlewares as $middleware) {
             try {
-                $controller = "Project\\Middlewares\\".$this->middleware."Middleware";
+                $controller = "Project\\Middlewares\\".$middleware."Middleware";
                 $controller = new $controller();
                 if(!call_user_func_array([$controller, 'run'], [])) {
                     return;
                 }
             } catch (\Exception $e) {
-                echo json_encode(['status' => 500, 'error' => "Erreur lors de l'appel du middleware: ".$this->middleware]);
+                respond(500, ['message' => "Erreur lors de l'appel du middleware: ".$middleware]);
             }
         }
         $rep = explode("@", $this->callable);
@@ -47,8 +47,8 @@ class Route {
         return call_user_func_array([$controller, $rep[1]], $this->matches);
     }
 
-    public function middleware(string $middleware): Route {
-        $this->middleware = $middleware;
+    public function middleware(array $middlewares): Route {
+        $this->middlewares = $middlewares;
         return $this;
     }
 

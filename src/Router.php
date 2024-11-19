@@ -25,6 +25,24 @@ class Router {
         return $route;
     }
 
+    public function put(string $path, string $callable): Route {
+        $route = new Route($path, $callable);
+        $this->routes["PUT"][] = $route;
+        return $route;
+    }
+
+    public function patch(string $path, string $callable): Route {
+        $route = new Route($path, $callable);
+        $this->routes["PATCH"][] = $route;
+        return $route;
+    }
+
+    public function delete(string $path, string $callable): Route {
+        $route = new Route($path, $callable);
+        $this->routes["DELETE"][] = $route;
+        return $route;
+    }
+
     public function prefix(string $prefix, array $routes): void {
         foreach($routes as $route) {
             $route->setPrefix($prefix);
@@ -40,8 +58,7 @@ class Router {
                 return $route->call();
             }
         }
-        // throw new \Exception('No matching routes');
-        echo json_encode(["status" => 404]);
+        respond(404, ['error' => 'Route not found !']);
     }
 
 }
