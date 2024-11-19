@@ -25,6 +25,12 @@ class Router {
         return $route;
     }
 
+    public function prefix(string $prefix, array $routes): void {
+        foreach($routes as $route) {
+            $route->setPrefix($prefix);
+        }
+    }
+
     public function run() {
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])){
             throw new \Exception('REQUEST_METHOD does not exist');
