@@ -8,6 +8,15 @@ class TypeManager extends Manager {
         return $stmt->fetchAll(\PDO::FETCH_CLASS, Type::class);
     }
 
+    public function getByName(string $name): Type|bool {
+        $stmt = $this->db->prepare("SELECT * FROM type WHERE name = ?");
+        $stmt->execute([
+            $name
+        ]);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, Type::class);
+        return $stmt->fetch();
+    }
+
     public function find(int $id): Type|bool {
         $stmt = $this->db->prepare("SELECT * FROM type WHERE id = ?");
         $stmt->execute([
@@ -17,12 +26,12 @@ class TypeManager extends Manager {
         return $stmt->fetch();
     }
 
-    public function create(string $name): int {
+    public function create(string $name): array {
         $stmt = $this->db->prepare("INSERT INTO type(name) VALUES (?)");
         $stmt->execute([
             $name
         ]);
-        return $this->db->lastInsertId();
+        return ['rowCount' => $stmt->rowCount(), 'id' => $this->db->lastInsertId()];
     }
 
     public function update(int $id, string $name): int {
