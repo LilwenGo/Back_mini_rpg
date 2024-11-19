@@ -1,41 +1,11 @@
-# Création d'une Todo liste
+# Projet Backend de mini-rpg
 
 **Prérequis**: Base PHP, les objets, le modèle MVC, la validation
 
-**Objectif**: Savoir utiliser toutes les connaissances jusque là accumulé (voir prérequis)
+## Introduction
 
-Dans cet exercice, nous allons créer une app qui permettra aux utilisateur de s'inscrire et de créer des todo listes.
-
-## Etape 1 - La structure de fichiers
-
-Notre application aura la stucture suivante
-
-```
-TodoList
-    public/
-        index.php
-        style.css
-    src/
-        Controllers/
-            UserController.php
-            TodoController.php
-        Models/
-            User.php
-            Todo.php
-            Task.php
-            UserManager.php
-            TodoManager.php
-            TaskManager.php
-        Views/
-            Auth/
-                login.php
-                register.php
-            Todo/
-                index.php
-                show.php
-                create.php
-        Router.php
-```
+Ceci est une application type API REST qui renvoie des données JSON au mini rpg qui les traite pour réaliser des actions.
+On peut aussi envoyer des données à l'API pour qu'elle les enregistre dans une base de données MySQL.
 
 ## Etape 2 - Composer et l'autoloading
 
@@ -71,9 +41,7 @@ $ php -S localhost:8000
 
 ## Etape 3 - Le router
 
-
-
-Voici une liste de route que l'on peut implementer:
+Voici une liste de route que l'on peut implementer (Ceci est un exemple pour une ToDo List):
 
 - "/dashboard/{todo}task/{task}, GET => montre le détail d'une tache
 - "/dashboard/task/nouveau, GET => création d'une tache
@@ -103,13 +71,3 @@ Créer un `TodoController` avec les methodes suivante:
 - `check($param)` => formulaire pour editer la todoliste
 - `update($param)`=> met à jour la todoliste
 - `delete($param)`=> supprime la todo liste
-
-## Etape 5 - Les views
-
-Création des vues avec le framework css de votre choix
-
-
-- "index" => montre toutes les todo liste avec leur tache
-- "show" => montre une seule todo liste avec ses taches
-- "create task" => montre le formulaire de création d'une tache
-- "edit" => montre le formulaire d'edition d'une tache 
